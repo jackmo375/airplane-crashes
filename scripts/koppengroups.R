@@ -48,9 +48,9 @@ df$loc_clean <- map_chr(df$Location, clean_location)
 # -----------------------------------------
 # 3. Geocode unique clean locations
 # -----------------------------------------
-unique_locs <- df %>% 
+df %>% 
   distinct(loc_clean) %>% 
-  filter(!is.na(loc_clean))
+  filter(!is.na(loc_clean)) -> unique_locs
 
 # Geocode using Nominatim (OpenStreetMap)
 # Rate limits automatically respected by tidygeocoder
@@ -106,5 +106,3 @@ df_final <- df %>%
 # 8. Write output
 # -----------------------------------------
 write_csv(df_final, "Airplane_Crashes_with_Koppen.csv")
-
-message("Done! File written to Airplane_Crashes_with_Koppen.csv")

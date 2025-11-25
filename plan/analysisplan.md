@@ -29,13 +29,16 @@ We use the covariates of season and year to ensure we are probing this relations
 
 model proposed
 --------------
-model: circular regression model. dependent variable is "time of day of crash"; independent variables are "koppen region of crash location", "year", "season"
+model: circular regression model
+dependent variable: "time of day of crash"
+independent variables: "koppen region of crash location", "year", "season"
 
 data transformations
 * map crash location to a koppen glimate group
 * split crash date into season (nominal) and year (integer)
 * no normalization of the time-of-day variable
 * normalize the year variable following log(2020 - year)
+* need to be careful - season is location dependent! I need to map this too. It cant be determined using months alone
 
 missing data imputation
 -----------------------
@@ -51,3 +54,19 @@ assessment of potential bias
 * technology has also improved over the years - new records more likely to have accurate information on crash time and location than older ones
 * potential for governments to downplay the number of crashes, or fatalities for a crash, as a means to cover up bureaucratic failures for example
 * the potential for government distortion is particularly important for countries and periods where the government was overly controlling, careful, and less globally cooperative, as can happen in times of war, economic depression, or dictatorship (for example communism or facisism). 
+
+workflow
+--------
+
+### clean
+1. rename variables if necessary
+2. cast all missing data as NA
+3. convert each variable into the correct type
+4. drop problematic rows
+5. select useful columns
+
+### transform
+
+### impute
+
+### model
