@@ -1,12 +1,13 @@
 library(tidyverse)
 library(cowplot)
 
-readRDS('./data/processed/data_imputed.RDS') %>% 
-	mutate(years_since_start = year - start_year) -> data_imputed
+readRDS('./data/processed/data_imputed.RDS') -> data_imputed
 
 start_year <- min(data_imputed$year)
 end_year <- max(data_imputed$year)
 n <- nrow(data_imputed)
+
+data_imputed %>% mutate(years_since_start = year - start_year) -> data_imputed
 
 max_interval_count <- 0
 largest_interval <- NA
@@ -36,6 +37,7 @@ data_imputed %>%
 		geom_vline(xintercept = data_imputed$year[largest_interval], color = "red", linetype = "dashed", linewidth = 1) +
 		geom_vline(xintercept = data_imputed$year[largest_interval] + 10, color = "red", linetype = "dashed", linewidth = 1) +
 		theme_cowplot()
+ggsave('./results/most_crashes.png')
 
 #######################################
 
@@ -69,6 +71,9 @@ data_imputed %>%
 		geom_vline(xintercept = data_imputed$year[largest_interval], color = "red", linetype = "dashed", linewidth = 1) +
 		geom_vline(xintercept = data_imputed$year[largest_interval] + 10, color = "red", linetype = "dashed", linewidth = 1) +
 		theme_cowplot()
+
+ggsave('./results/most_fatalities.png')
+
 
 
 #####################################
@@ -104,8 +109,7 @@ data_imputed_thunder %>%
 		geom_vline(xintercept = data_imputed_thunder$year[largest_interval] + 10, color = "red", linetype = "dashed", linewidth = 1) +
 		theme_cowplot()
 
-
-
+ggsave('./results/most_storms.png')
 
 
 
