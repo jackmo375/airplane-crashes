@@ -7,4 +7,6 @@ Workflow steps are:
 2. transform
 3. check
 4. impute
-5. analyze
+5. check
+6. analyze
+7. check
